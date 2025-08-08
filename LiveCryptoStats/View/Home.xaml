@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:LiveCryptoStats.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="600"
-             d:DesignWidth="622"
+             d:DesignWidth="822"
              Style="{StaticResource Page_Style}">
 
     <UserControl.DataContext>
@@ -14,8 +14,9 @@
     </UserControl.DataContext>
     
     <Grid>
-        
-        <DataGrid x:Name="CryptoDataGrid"
+
+        <DataGrid x:Name="cboCurrencies"
+                  ItemsSource="{Binding Currencies}"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
                   IsReadOnly="True"
@@ -25,15 +26,32 @@
                   GridLinesVisibility="None"
                   Background="#1E1E2F"
                   BorderBrush="#1E1E2F"
-                  FontSize="14"
-                  Margin="10">
+                  FontSize="14">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Назва" Binding="{Binding Name}" Width="*"/>
-                <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" Width="*"/>
-                <DataGridTextColumn Header="24ч" Binding="{Binding Change24h}" Width="*"/>
-                <DataGridTextColumn Header="Обʼєм за 24ч" Binding="{Binding Volume24h}" Width="*"/>
-                <DataGridTextColumn Header="Капіталізація" Binding="{Binding MarketCap}" Width="*"/>
+                <DataGridTemplateColumn Header="Назва" Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0">
+                                <Image Source="{Binding ImageUrl}" Width="30" Height="30" Stretch="Uniform" Margin="0,0,10,0"/>
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Code}" 
+                               Style="{StaticResource Grid_Text_Style}" 
+                               />
+                                    <TextBlock Text="{Binding Name}" 
+                                               Style="{StaticResource Grid_Text_Style}" FontSize="15" 
+                                               Margin="4,3,0,0" Foreground="Gray"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
+                <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
+                <DataGridTextColumn Header="Volum(24hr)" Binding="{Binding Volume}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
+                <DataGridTextColumn Header="Change(24hr)" Binding="{Binding ChangePercent24Hr}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
                 <DataGridTemplateColumn Header="Дії" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
