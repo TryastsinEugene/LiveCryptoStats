@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:LiveCryptoStats.ViewModel"
+                    xmlns:view="clr-namespace:LiveCryptoStats.View"
+                    >
+
+    <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <view:Home />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SettingVM}">
+        <view:Settings />
+    </DataTemplate>
+
+</ResourceDictionary>
