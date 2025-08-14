@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:LiveCryptoStats.ViewModel"
         xmlns:Menu="clr-namespace:LiveCryptoStats.Utilities"
-        mc:Ignorable="d"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Title="Live Crypto Stats" 
-        Height="600" 
-        Width="1050"
+        Height="720" 
+        Width="1080"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -18,85 +18,105 @@
     <Window.DataContext>
         <vm:NavigationVM />
     </Window.DataContext>
-    
-    <Grid>
+
+    <Border Background="#212529">
         
-        <!--Window Border-->
-        
-        <Border Background="#212529"
-                CornerRadius="20"
-                />
         
         <Grid>
             
             <!--Base Grid-->
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="228"/>
-                <ColumnDefinition Width="822" />
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid HorizontalAlignment="Left"
-                  Width="228">
+                  Width="200">
 
-                <Border Background="#272B2F"
-                        CornerRadius="20,0,0,20" />
+                <DockPanel>
 
-                <StackPanel Height="400"
-                            Width="228">
 
-                    <!--// Home //-->
+                    <!--// Logo and Title Bar -->
 
+                    <TextBlock Text="Live Crypto Stats"
+                               Style="{StaticResource Text_Style}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               Margin="25" 
+                               DockPanel.Dock="Top"/>
+                    
+                    
+                    <!--Separator-->
+
+                    <Separator Margin="25"
+                               DockPanel.Dock="Top"
+                               Height="0.8"
+                               Background="#DBDBDB" />
+                    
+                    <!--Buttons for Navigation-->
+
+                    <StackPanel DockPanel.Dock="Top">
+
+
+                        <!--// Home //-->
+
+                        <Menu:Btn Style="{StaticResource BtnStyle}"
+                                  Command="{Binding HomeCommand}"
+                                  IsChecked="true"
+                                  DockPanel.Dock="Top">
+
+                            <Grid>
+                              <Icon:PackIconMaterial Kind="Home" Style="{StaticResource Icon_Style}" />
+                                        
+                              <TextBlock Text="Home" Style="{StaticResource Text_Style}" />
+                            </Grid>
+
+                        </Menu:Btn>
+
+                        <!--// Settings //-->
+
+                         <Menu:Btn Style="{StaticResource BtnStyle}"
+                                   Command="{Binding SettingsCommand}"
+                                   DockPanel.Dock="Top">
+
+                            <Grid>
+                                <Icon:PackIconMaterial Kind="Cog" Style="{StaticResource Icon_Style}" />
+
+                                <TextBlock Text="Settings" Style="{StaticResource Text_Style}" />
+                            </Grid>
+
+                        </Menu:Btn>
+
+                    </StackPanel>
+
+
+                    <!--Exit-->
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding HomeCommand}"
-                              IsChecked="true">
+                                   Command="{Binding SettingsCommand}"
+                                   DockPanel.Dock="Bottom"
+                                   >
 
-                        <Grid>
+                    <Grid>
+                        <Icon:PackIconMaterial Kind="ExitRun" Style="{StaticResource Icon_Style}" />
 
-                            <Image Source="/Images/img_home.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            
-                            <TextBlock Text="Home"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
+                        <TextBlock Text="Exit" Style="{StaticResource Text_Style}" />
+                    </Grid>
 
                     </Menu:Btn>
-
-                    <!--// Settings //-->
-
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding SettingsCommand}">
-
-                        <Grid>
-
-                            <Image Source="/Images/img_setting.png"
-                                   Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Settings"
-                                       Style="{StaticResource Text_Style}" />
-
-                        </Grid>
-
-                    </Menu:Btn>
-
-                </StackPanel>
+                </DockPanel>
 
             </Grid>
 
+            
             <Grid Grid.Column="1">
 
-                <ContentControl x:Name="Pages"
+                <ContentControl Grid.Row="1" x:Name="Pages"
                                 Content="{Binding CurrentView}" />
 
             </Grid>
 
         </Grid>
 
-        <!--<Button x:Name="CloseApp"
-                Style="{StaticResource ExitApp}"
-                Click="CloseApp_Click" />-->
-
-    </Grid>
+    </Border>
 </Window>

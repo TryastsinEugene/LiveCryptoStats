@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:vm="clr-namespace:LiveCryptoStats.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="600"
@@ -12,10 +13,42 @@
     <UserControl.DataContext>
         <vm:HomeVM />
     </UserControl.DataContext>
-    
-    <Grid>
 
-        <DataGrid x:Name="cboCurrencies"
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+    
+    <Grid Margin="0 20 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--Search-->
+
+        <Grid Width="300" HorizontalAlignment="Left">
+            <TextBlock Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" 
+                       Panel.ZIndex="1" Text="Search by codes or names..."
+                       Visibility="{Binding ElementName=txtSearch,Path=Text.IsEmpty,Converter={StaticResource BoolToVis} }"
+                       />
+
+            <TextBox x:Name="txtSearch" 
+                     Style="{StaticResource Text_Box_Search}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" 
+                                Command="{Binding SearchCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+            
+            <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"
+                                   Margin="0 0 15 0" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+
+        </Grid>
+        <!--Main Grid of information-->
+        
+        <DataGrid Grid.Row="1" x:Name="cboCurrencies"
                   ItemsSource="{Binding Currencies}"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
@@ -29,7 +62,7 @@
                   FontSize="14">
 
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Назва" Width="auto">
+                <DataGridTemplateColumn Header="Name" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0">
@@ -52,12 +85,11 @@
                 <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
                 <DataGridTextColumn Header="Volum(24hr)" Binding="{Binding Volume}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
                 <DataGridTextColumn Header="Change(24hr)" Binding="{Binding ChangePercent24Hr}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
-                <DataGridTemplateColumn Header="Дії" Width="80">
+                <DataGridTemplateColumn Header="Action" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="🔍" Margin="2" Width="30" Height="30" />
-                                <Button Content="🔔" Margin="2" Width="30" Height="30" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

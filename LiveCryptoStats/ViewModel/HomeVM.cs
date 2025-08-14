@@ -8,20 +8,70 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace LiveCryptoStats.ViewModel
 {
 	class HomeVM : ViewModelBase
 	{
 		private readonly PageModel _pageModel;
+		public string SearchText { get; set; }
+		public ICommand SearchCommand { get; }
 		public ObservableCollection<Currency> Currencies { get; set; }		
 		public HomeVM()
 		{
 			_pageModel = new PageModel();
 			Currencies = new ObservableCollection<Currency>();
-			_ = GetAssets(); 
+			SearchCommand = new RelayCommand(ExecuteSearch);
+			//_ = GetAssets(); 
 		}
 
+		private void ExecuteSearch(object obj)
+		{
+			ExecuteSearchAsync();
+		}
+
+		private async Task ExecuteSearchAsync()
+		{
+			using (HttpClient client = new HttpClient())
+			{
+				client.DefaultRequestHeaders.Add("Authorization", "Bearer 58ee904cb0b994e1703c2c6d0ba5a1727b4ce0347d7109f9ddc370078eb3a9c5");
+
+				try
+				{
+					HttpResponseMessage response = await client.GetAsync($"https://rest.coincap.io/v3/assets?search={SearchText}");
+					response.EnsureSuccessStatusCode();
+
+					string json = await response.Content.ReadAsStringAsync();
+
+
+					var apiResult = System.Text.Json.JsonSerializer.Deserialize<ApiResponse>(json);
+
+					if (apiResult?.data != null)
+					{
+						Currencies.Clear();
+
+						foreach (var apiCurrency in apiResult.data)
+						{
+							Currencies.Add(new Currency
+							{
+								Name = apiCurrency.name,
+								Code = apiCurrency.symbol,
+								ImageUrl = $"https://assets.coincap.io/assets/icons/{apiCurrency.symbol.ToLower()}@2x.png",
+								Price = FormatAsCurrency(apiCurrency.priceUsd),
+								Volume = FormatReduction(apiCurrency.volumeUsd24Hr) + "$",
+								Supply = FormatReduction(apiCurrency.supply),
+								ChangePercent24Hr = FormatAsCurrency(apiCurrency.changePercent24Hr, true)
+							});
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("API error: " + ex.Message);
+				}
+			}
+		}
 		private async Task GetAssets()
 		{
 			using (HttpClient client = new HttpClient())

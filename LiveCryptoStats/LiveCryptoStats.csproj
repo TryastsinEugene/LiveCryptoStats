@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\img_home.png" />
     <Resource Include="Images\img_setting.png" />
   </ItemGroup>
