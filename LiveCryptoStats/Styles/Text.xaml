@@ -33,7 +33,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBoxBase">
-                    <Border x:Name="border" 
+                    <Border x:Name="searchBorder" 
                             CornerRadius="20" 
                             Background="{TemplateBinding Background}"
                             SnapsToDevicePixels="True"
@@ -47,11 +47,11 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="border"/>
+                            <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="searchBorder"/>
                         </Trigger>
 
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="border"/>
+                            <Setter Property="BorderBrush" Value="#d9d9d9" TargetName="searchBorder"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -12,4 +12,8 @@
         <view:Settings />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:IndividualInfoVM}">
+        <view:IndividualInfo />
+    </DataTemplate>
+    
 </ResourceDictionary>

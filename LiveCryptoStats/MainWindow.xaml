@@ -19,7 +19,7 @@
         <vm:NavigationVM />
     </Window.DataContext>
 
-    <Border Background="#212529">
+    <Border Background="#212529" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         
         
         <Grid>
@@ -90,29 +90,34 @@
 
                     </StackPanel>
 
-
-                    <!--Exit-->
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                                   Command="{Binding SettingsCommand}"
-                                   DockPanel.Dock="Bottom"
-                                   >
-
-                    <Grid>
-                        <Icon:PackIconMaterial Kind="ExitRun" Style="{StaticResource Icon_Style}" />
-
-                        <TextBlock Text="Exit" Style="{StaticResource Text_Style}" />
-                    </Grid>
-
-                    </Menu:Btn>
                 </DockPanel>
 
             </Grid>
 
             
             <Grid Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-                <ContentControl Grid.Row="1" x:Name="Pages"
-                                Content="{Binding CurrentView}" />
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right" Margin="0 10 10 0">
+                        <Button Height="15" Width="15"  Margin="10 0 0 0" Command="{Binding MinimizeCommand}">
+                            <Icon:PackIconMaterial Kind="WindowMinimize" Background="Transparent"  Height="7" Width="7"/>
+                        </Button>
+                        <Button Height="15" Width="15"  Margin="2 0 0 0" Command="{Binding MaximizeCommand}">
+                            <Icon:PackIconMaterial Kind="WindowMaximize" Background="Transparent" Height="7" Width="7"/>
+                        </Button>
+                        <Button Height="15" Width="15"  Margin="2 0 0 0" Command="{Binding CloseCommand}">
+                            <Icon:PackIconMaterial Kind="WindowClose" Background="Transparent" Height="7" Width="7"/>
+                        </Button>
+                    </StackPanel>
+
+                    <ContentControl Grid.Row="1" x:Name="Pages"
+                                    Content="{Binding CurrentView}" />
+                </Grid>
+               
 
             </Grid>
 

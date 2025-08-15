@@ -88,9 +88,10 @@
                 <DataGridTemplateColumn Header="Action" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="🔍" Margin="2" Width="30" Height="30" />
-                            </StackPanel>
+                            <Button Command="{Binding DataContext.IndividualInfo,RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}">
+                                <Icon:PackIconMaterial Kind="EyeOutline" Style="{StaticResource Icon_Style}" />
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
