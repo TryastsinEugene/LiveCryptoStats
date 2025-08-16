@@ -12,8 +12,8 @@
         <view:Settings />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:IndividualInfoVM}">
-        <view:IndividualInfo />
+    <DataTemplate DataType="{x:Type vm:CurrencyDetailsVM}">
+        <view:CurrencyDetails/>
     </DataTemplate>
-    
+       
 </ResourceDictionary>

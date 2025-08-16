@@ -1,5 +1,6 @@
 ﻿using LiveCryptoStats.Models;
 using LiveCryptoStats.Utilities;
+using LiveCryptoStats.View;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Windows.Input;
@@ -11,6 +12,9 @@ namespace LiveCryptoStats.ViewModel
 		private readonly PageModel _pageModel;
 		public string SearchText { get; set; } = string.Empty;
 		public ICommand SearchCommand { get; }
+
+		public ICommand CurrencyDetailsCommand { get; }
+		public Action<Currency> NavigateToCurrencyDetailsAction { get; set; } 
 		public ObservableCollection<Currency> Currencies { get; set; }
 
 		// API ключ та базовий URL для CoinCap API
@@ -22,7 +26,16 @@ namespace LiveCryptoStats.ViewModel
 			_pageModel = new PageModel();
 			Currencies = new ObservableCollection<Currency>();
 			SearchCommand = new RelayCommand(ExecuteSearch);
-			//_ = GetAssets(); 
+			CurrencyDetailsCommand = new RelayCommand(OpenCurrencyDetails);
+			_ = GetAssets(); 
+		}
+
+		private void OpenCurrencyDetails(object obj)
+		{
+			if (obj is Currency currency)
+			{
+				NavigateToCurrencyDetailsAction?.Invoke(currency);
+			}
 		}
 
 		private void ExecuteSearch(object obj)
@@ -84,10 +97,6 @@ namespace LiveCryptoStats.ViewModel
 				}
 			}
 		}
-
-		
-
-
 
 	}
 

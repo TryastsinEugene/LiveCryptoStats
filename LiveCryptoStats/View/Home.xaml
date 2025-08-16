@@ -10,9 +10,9 @@
              d:DesignWidth="822"
              Style="{StaticResource Page_Style}">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:HomeVM />
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -88,7 +88,7 @@
                 <DataGridTemplateColumn Header="Action" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding DataContext.IndividualInfo,RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            <Button Command="{Binding DataContext.CurrencyDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     CommandParameter="{Binding}">
                                 <Icon:PackIconMaterial Kind="EyeOutline" Style="{StaticResource Icon_Style}" />
                             </Button>

@@ -34,15 +34,20 @@ namespace LiveCryptoStats.ViewModel
 		public ICommand MinimizeCommand { get; set; }
 		public ICommand MaximizeCommand { get; set; }
 
-		private void Home(object view) => CurrentView = new HomeVM();
 		private void Settings(object view) => CurrentView = new SettingVM();
 
 		public NavigationVM()
 		{
-			HomeCommand = new RelayCommand(Home);
+			var homeVM = new HomeVM();
+			homeVM.NavigateToCurrencyDetailsAction = currency =>
+			{
+				CurrentView = new CurrencyDetailsVM(currency);
+			};
+
+			HomeCommand = new RelayCommand(_ => CurrentView = homeVM);
 			SettingsCommand = new RelayCommand(Settings);
 
-			CurrentView = new HomeVM();
+			CurrentView = homeVM;
 
 			CloseCommand = new RelayCommand(param => { Application.Current.Shutdown(); });
 			MinimizeCommand = new RelayCommand(param => { Application.Current.MainWindow.WindowState = WindowState.Minimized; });
