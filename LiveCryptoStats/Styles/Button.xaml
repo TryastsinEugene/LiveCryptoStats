@@ -19,11 +19,12 @@
                 <Border x:Name="border"
                         Height="50"
                         Width="228"
-                        BorderThickness="0">
+                        BorderThickness="0"
+                        >
 
                     <Border.Background>
-                        <SolidColorBrush x:Name="BorderBackground"
-                                         Color="#27282F" />
+                        <SolidColorBrush x:Name="BorderBackground"/>
+                                         
                     </Border.Background>
 
                     <Grid>
@@ -98,5 +99,180 @@
         </Setter>
         
     </Style>
+
+    <!--Time Button-->
+    <Style x:Key="TimeBtnStyle"
+           TargetType="RadioButton">
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+        <Setter Property="Margin"
+                Value="5" />
         
+        
+        <Setter Property="Template">
+        <Setter.Value>
+        <ControlTemplate TargetType="RadioButton">
+
+        <Border x:Name="border"
+                Height="25"
+                Width="60"
+                BorderThickness="0"
+                CornerRadius="5">
+
+            <Border.Background>
+                <SolidColorBrush x:Name="BorderBackground"
+                                 Color="#27282F" />
+            </Border.Background>
+
+            <Grid>
+
+                <Border x:Name="Indicator"
+                        Height="4"
+                        Width="35"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Background="#FFFFFF"
+                        Visibility="Collapsed"
+                        CornerRadius="2" />
+
+                    <ContentPresenter />
+                </Grid>
+            
+        </Border>
+
+        <ControlTemplate.Triggers>
+
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+
+                <Setter Property="Visibility"
+                        TargetName="Indicator"
+                        Value="Visible" />
+            </Trigger>
+
+            <EventTrigger RoutedEvent="Border.MouseEnter"
+                      SourceName="border">
+
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                            Storyboard.TargetProperty="Color"
+                                            From="#27282F"
+                                            To="#3E434A"
+                                            Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                
+            </EventTrigger>
+
+            <EventTrigger RoutedEvent="Border.MouseLeave"
+                              SourceName="border">
+
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                            Storyboard.TargetProperty="Color"
+                                            From="#3E434A"
+                                            To="#27282F"
+                                            Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+
+            <Trigger Property="IsChecked"
+                     Value="True">
+
+                    <Setter Property="Background"
+                            TargetName="border"
+                            Value="#212529" />
+
+                    <Setter Property="Visibility"
+                            TargetName="Indicator"
+                            Value="Visible" />
+                </Trigger>
+        </ControlTemplate.Triggers>    
+    </ControlTemplate>
+    </Setter.Value>
+</Setter>
+    </Style>
+
+    <!--Settings Button-->
+    <Style x:Key="SettingsButton" TargetType="Button">
+        <Setter Property="Margin" Value="15, 0, 0, 0" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Border x:Name="border"
+                            Height="150"
+                            Width="150"
+                            BorderThickness="0"
+                            CornerRadius="10"
+                            >
+
+                        <Border.Background>
+                            <SolidColorBrush x:Name="BorderBackground"
+                                             Color="#27282F"
+                                             />
+                                  
+                        </Border.Background>
+
+                        <ContentPresenter />
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+
+                            <Setter Property="Visibility"
+                                    Value="Visible" />
+                           
+                        </Trigger>
+
+                        <EventTrigger RoutedEvent="Border.MouseEnter"
+                                      SourceName="border">
+
+                            <BeginStoryboard>
+                                <Storyboard>
+                                     <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                                     Storyboard.TargetProperty="Color"
+                                                     To="#3E434A"
+                                                     Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+
+                        </EventTrigger>
+
+                        <EventTrigger RoutedEvent="Border.MouseLeave"
+                                      SourceName="border">
+
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                     Storyboard.TargetProperty="Color"
+                                     To="#27282F"
+                                     Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                       
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Details Button-->
+    <Style TargetType="Button" x:Key="DetailsButton">
+        <Setter Property="Foreground" Value="#DBDBDB" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Padding" Value="6,2" />
+    </Style>
 </ResourceDictionary>

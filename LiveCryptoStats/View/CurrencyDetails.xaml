@@ -5,21 +5,102 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:LiveCryptoStats.ViewModel"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             xmlns:Menu="clr-namespace:LiveCryptoStats.Utilities"
              mc:Ignorable="d" 
              d:DesignHeight="600"
              d:DesignWidth="822"
              Style="{StaticResource Page_Style}">
 
+    <!--<UserControl.DataContext>
+         <vm:CurrencyDetailsVM />
+    </UserControl.DataContext>-->
         
     <Grid>
-        <!--<StackPanel>
-            <TextBlock Text="sgsshgs"/>
-            <TextBlock Text="sgsshgs"/>
-            <TextBlock Text="sgsshgs"/>
-        </StackPanel>-->
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <lvc:CartesianChart Series="{Binding Series}" XAxes="{Binding XAxes}"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0">
+            <Image Source="{Binding Currency.ImageUrl}" Width="30" Height="30" Stretch="Uniform" Margin="0,0,10,0"/>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Currency.Code}" 
+                            Style="{StaticResource Grid_Text_Style}" 
+                />
+                <TextBlock Text="{Binding Currency.Name}" 
+                   Style="{StaticResource Grid_Text_Style}" FontSize="15" 
+                   Margin="4,3,0,0" Foreground="Gray"/>
+            </StackPanel>
+
+            
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 20 0 0">
+            <Menu:Btn Style="{StaticResource TimeBtnStyle}"
+                      Command="{Binding LoadDataCommand}"
+                      CommandParameter="m15"
+                      >
+
+                <TextBlock Text="15m" Style="{StaticResource TimeButtonText}" />
+
+            </Menu:Btn>
+            
+            <Menu:Btn Style="{StaticResource TimeBtnStyle}"
+                      Command="{Binding LoadDataCommand}"
+                      CommandParameter="m30"
+                      >
+
+                <TextBlock Text="30m" Style="{StaticResource TimeButtonText}" />
+
+            </Menu:Btn>
+            
+            <Menu:Btn Style="{StaticResource TimeBtnStyle}"
+                      Command="{Binding LoadDataCommand}"
+                      CommandParameter="h1"
+                      IsChecked="true"
+                      >
+
+                <TextBlock Text="1h" Style="{StaticResource TimeButtonText}" />
+
+            </Menu:Btn>
+
+            <Menu:Btn Style="{StaticResource TimeBtnStyle}"
+                      Command="{Binding LoadDataCommand}"
+                      CommandParameter="h2"
+                      >
+
+                <TextBlock Text="2h" Style="{StaticResource TimeButtonText}" />
+
+            </Menu:Btn>
+
+            <Menu:Btn Style="{StaticResource TimeBtnStyle}"
+                      Command="{Binding LoadDataCommand}"
+                      CommandParameter="h6"
+                      >
+
+                <TextBlock Text="6h" Style="{StaticResource TimeButtonText}" />
+
+            </Menu:Btn>
+
+            <Menu:Btn Style="{StaticResource TimeBtnStyle}"
+                      Command="{Binding LoadDataCommand}"
+                      CommandParameter="h12"
+               
+                      >
+
+                <TextBlock Text="12h" Style="{StaticResource TimeButtonText}" />
+
+            </Menu:Btn>
+
+            <Menu:Btn Style="{StaticResource TimeBtnStyle}"
+                      Command="{Binding LoadDataCommand}"
+                      CommandParameter="d1"
+                      >
+
+                <TextBlock Text="1d" Style="{StaticResource TimeButtonText}" />
+
+            </Menu:Btn>
+        </StackPanel>
+        <lvc:CartesianChart Grid.Row="2" Series="{Binding Series}" XAxes="{Binding XAxes}"/>
     </Grid>
 </UserControl>

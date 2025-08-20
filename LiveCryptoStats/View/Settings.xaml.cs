@@ -24,5 +24,7 @@ namespace LiveCryptoStats.View
         {
             InitializeComponent();
         }
+
+	
     }
 }

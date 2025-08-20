@@ -7,6 +7,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using LiveChartsCore.Defaults;
 using System.Globalization;
+using System.Windows.Input;
 
 namespace LiveCryptoStats.ViewModel
 {
@@ -29,24 +30,31 @@ namespace LiveCryptoStats.ViewModel
 			}
 		}
 
-		private const string ApiKey = "Bearer 58ee904cb0b994e1703c2c6d0ba5a1727b4ce0347d7109f9ddc370078eb3a9c5";
+		public ICommand LoadDataCommand { get; set; }
+
+		private const string ApiKey = "Bearer 087a7841ebc2ca77cecf769dd34b3af28bb3783d5308df1ffa2f886fd1b058ae";
 
 		public CurrencyDetailsVM(Currency currency)
 		{
 			Currency = currency;
-			LoadData();
+			LoadDataCommand = new RelayCommand(p =>
+			{
+				if(p is string interval)
+					LoadData(interval);
+			});
+			LoadData("h1");
 		}
 
-		private async void LoadData()
+		private async void LoadData(string time)
 		{
 			using var client = new HttpClient();
 			client.DefaultRequestHeaders.Add("Authorization", ApiKey);
-			var json = await client.GetStringAsync($"https://rest.coincap.io/v3/assets/{Currency.Name.ToLower()}/history?interval=h1");
+			var json = await client.GetStringAsync($"https://rest.coincap.io/v3/assets/{Currency.Name.ToLower()}/history?interval={time}");
 
 			var result = JsonConvert.DeserializeObject<CoinCapResponse>(json);
 
-			//групуємо по даті
-			if(result != null)
+			//group by date and create candle points
+			if (result != null)
 			{
 				var grouped = result.Data
 				.GroupBy(p => DateTimeOffset.FromUnixTimeMilliseconds(p.Time).Date)
@@ -86,8 +94,10 @@ namespace LiveCryptoStats.ViewModel
 					}
 				};
 
+
 				OnPropertyChanged(nameof(Series));
 				OnPropertyChanged(nameof(XAxes));
+				
 			}
 			
 		}

@@ -17,5 +17,40 @@
               Value="30" />
         <Setter Property="Foreground"
               Value="#DBDBDB" />
-    </Style>  
+    </Style>
+
+<Style x:Key="Grid_Icon_Style"  
+        TargetType="IconPacks:PackIconMaterial">
+
+        <Setter Property="HorizontalAlignment"  
+             Value="Center" />
+        <Setter Property="VerticalAlignment"  
+             Value="Center" />
+        <Setter Property="Margin"  
+             Value="22,0,0,0" />
+        <Setter Property="Width"  
+             Value="30" />
+        <Setter Property="Height"  
+             Value="30" />
+        <Setter Property="Foreground"
+             Value="#DBDBDB" />
+</Style>
+
+    <!--Settings Icon Style-->
+    <Style x:Key="Settings_Icon_Style"  
+       TargetType="IconPacks:PackIconMaterial">
+
+        <Setter Property="HorizontalAlignment"  
+            Value="Center" />
+        <Setter Property="VerticalAlignment"  
+            Value="Center" />
+        <Setter Property="Margin"  
+            Value="0,10,0,0" />
+        <Setter Property="Width"  
+            Value="50" />
+        <Setter Property="Height"  
+            Value="50" />
+        <Setter Property="Foreground"
+       Value="#DBDBDB" />
+    </Style>
 </ResourceDictionary>

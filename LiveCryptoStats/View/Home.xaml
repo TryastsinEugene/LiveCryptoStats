@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="600"
              d:DesignWidth="822"
-             Style="{StaticResource Page_Style}">
+             Style="{DynamicResource Page_Style}"
+             >
 
     <!--<UserControl.DataContext>
         <vm:HomeVM />
@@ -53,12 +54,12 @@
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
                   IsReadOnly="True"
-                  RowBackground="#252538"
-                  AlternatingRowBackground="#1E1E2F"
-                  Foreground="#252538"
+                  RowBackground="#3E434A"
+                  AlternatingRowBackground="#27282F"
+                  Foreground="#27282F"
                   GridLinesVisibility="None"
-                  Background="#1E1E2F"
-                  BorderBrush="#1E1E2F"
+                  Background="#27282F"
+                  BorderBrush="#27282F"
                   FontSize="14">
 
             <DataGrid.Columns>
@@ -84,13 +85,35 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
                 <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
                 <DataGridTextColumn Header="Volum(24hr)" Binding="{Binding Volume}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
-                <DataGridTextColumn Header="Change(24hr)" Binding="{Binding ChangePercent24Hr}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
-                <DataGridTemplateColumn Header="Action" Width="80">
+                <DataGridTextColumn Header="Change(24hr)" Binding="{Binding ChangePercent24Hr}" Foreground="{Binding ChangePercent24Hr, Converter={StaticResource PriceToColorConverter}}"  Width="*" />
+                <!--<DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground"
+                                    Value="{Binding ChangePercent24Hr, Converter={StaticResource }}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>-->
+                <!--</DataGridTextColumn>-->
+                <DataGridTemplateColumn Header="Details" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Command="{Binding DataContext.CurrencyDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
-                                <Icon:PackIconMaterial Kind="EyeOutline" Style="{StaticResource Icon_Style}" />
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource DetailsButton}"
+                                    >
+                                <Icon:PackIconMaterial Kind="InformationOutline"
+                                                       Width="20"
+                                                       Height="20">
+                                    <Icon:PackIconMaterial.Style>
+                                        <Style TargetType="Icon:PackIconMaterial">
+                                            <Setter Property="Foreground" Value="Gray"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="#4FC3F7"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Icon:PackIconMaterial.Style>
+                                </Icon:PackIconMaterial>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

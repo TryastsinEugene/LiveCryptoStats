@@ -21,7 +21,7 @@
                 Value="Left" />
     </Style>
     
-    <!--TextBoxSearch-->
+    <!--Text Box Search-->
     <Style x:Key="Text_Box_Search" TargetType="TextBox">
         <Setter Property ="Background" Value="#ffffff" />
         <Setter Property ="Foreground" Value="#b0b9c6" />
@@ -57,5 +57,45 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    
+    <!--Time Button Text-->
+    <Style x:Key="TimeButtonText"
+        TargetType="TextBlock"
+        >
+
+        <Setter Property="FontFamily"
+             Value="/Fonts/#Rubik" />
+        <Setter Property="FontSize"
+             Value="15" />
+        <Setter Property="Foreground"
+             Value="#DBDBDB" />
+        <Setter Property="TextAlignment"
+             Value="Center" />
+        <Setter Property="VerticalAlignment"
+             Value="Center" />
+        <Setter Property="HorizontalAlignment"
+             Value="Center" />
+    </Style>
+    
+    <!--Settings Button Text-->
+    <Style x:Key="Settings_Text_Style"
+       TargetType="TextBlock"
+       >
+
+        <Setter Property="FontFamily"
+            Value="/Fonts/#Rubik" />
+        <Setter Property="FontSize"
+            Value="18" />
+        <Setter Property="Foreground"
+            Value="#DBDBDB" />
+        <Setter Property="TextAlignment"
+            Value="Left" />
+        <Setter Property="VerticalAlignment"
+            Value="Center" />
+        <Setter Property="HorizontalAlignment"
+            Value="Center" />
+        <Setter Property="Margin" Value="30"/>
+        <Setter Property="FontSize" Value="15" />
     </Style>
 </ResourceDictionary>

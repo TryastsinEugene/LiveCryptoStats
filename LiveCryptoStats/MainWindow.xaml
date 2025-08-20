@@ -12,14 +12,16 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="Transparent"
+        
         >
 
     <Window.DataContext>
         <vm:NavigationVM />
     </Window.DataContext>
 
-    <Border Background="#212529" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border Background="{StaticResource BorderBackground}" 
+            MouseDown="Border_MouseDown" 
+            MouseLeftButtonDown="Border_MouseLeftButtonDown">
         
         
         <Grid>
@@ -67,21 +69,21 @@
                                   DockPanel.Dock="Top">
 
                             <Grid>
-                              <Icon:PackIconMaterial Kind="Home" Style="{StaticResource Icon_Style}" />
-                                        
-                              <TextBlock Text="Home" Style="{StaticResource Text_Style}" />
+                                <Icon:PackIconMaterial Kind="Home" Style="{StaticResource Icon_Style}" Foreground="{StaticResource ForegroundBrush}"/>
+
+                                <TextBlock Text="Home" Style="{StaticResource Text_Style}" />
                             </Grid>
 
                         </Menu:Btn>
 
                         <!--// Settings //-->
 
-                         <Menu:Btn Style="{StaticResource BtnStyle}"
+                        <Menu:Btn Style="{StaticResource BtnStyle}"
                                    Command="{Binding SettingsCommand}"
                                    DockPanel.Dock="Top">
 
                             <Grid>
-                                <Icon:PackIconMaterial Kind="Cog" Style="{StaticResource Icon_Style}" />
+                                <Icon:PackIconMaterial Kind="Cog" Style="{StaticResource Icon_Style}" Foreground="{StaticResource ForegroundBrush}"/>
 
                                 <TextBlock Text="Settings" Style="{StaticResource Text_Style}" />
                             </Grid>

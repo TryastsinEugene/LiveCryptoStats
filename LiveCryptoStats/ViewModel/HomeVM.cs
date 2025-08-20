@@ -17,8 +17,8 @@ namespace LiveCryptoStats.ViewModel
 		public Action<Currency> NavigateToCurrencyDetailsAction { get; set; } 
 		public ObservableCollection<Currency> Currencies { get; set; }
 
-		// API ключ та базовий URL для CoinCap API
-		private const string ApiKey = "Bearer 58ee904cb0b994e1703c2c6d0ba5a1727b4ce0347d7109f9ddc370078eb3a9c5";
+		// API key and base URL for CoinCap API
+		private const string ApiKey = "Bearer 087a7841ebc2ca77cecf769dd34b3af28bb3783d5308df1ffa2f886fd1b058ae";
 		private const string BaseUrl = "https://rest.coincap.io/v3/assets";
 		
 		public HomeVM()
@@ -27,7 +27,7 @@ namespace LiveCryptoStats.ViewModel
 			Currencies = new ObservableCollection<Currency>();
 			SearchCommand = new RelayCommand(ExecuteSearch);
 			CurrencyDetailsCommand = new RelayCommand(OpenCurrencyDetails);
-			_ = GetAssets(); 
+			//_ = GetAssets(); 
 		}
 
 		private void OpenCurrencyDetails(object obj)
@@ -43,10 +43,10 @@ namespace LiveCryptoStats.ViewModel
 			ExecuteSearchAsync();
 		}
 
-		// Пошук
+		// Search
 		private Task ExecuteSearchAsync() => LoadAssetsAsync(SearchText);
 
-		// Топ N активів
+		// Top N actives
 		private Task GetAssets() => LoadAssetsAsync(limit: 10);
 
 		private async Task LoadAssetsAsync(string query = null, int? limit = null)
