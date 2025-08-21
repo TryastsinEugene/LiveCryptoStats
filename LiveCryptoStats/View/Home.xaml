@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600"
              d:DesignWidth="822"
-             Style="{DynamicResource Page_Style}"
+             Style="{StaticResource Page_Style}"
              >
 
     <!--<UserControl.DataContext>
@@ -85,14 +85,7 @@
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
                 <DataGridTextColumn Header="Supply" Binding="{Binding Supply}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
                 <DataGridTextColumn Header="Volum(24hr)" Binding="{Binding Volume}" ElementStyle="{StaticResource Grid_Text_Style}" Width="*"/>
-                <DataGridTextColumn Header="Change(24hr)" Binding="{Binding ChangePercent24Hr}" Foreground="{Binding ChangePercent24Hr, Converter={StaticResource PriceToColorConverter}}"  Width="*" />
-                <!--<DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Foreground"
-                                    Value="{Binding ChangePercent24Hr, Converter={StaticResource }}" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>-->
-                <!--</DataGridTextColumn>-->
+                <DataGridTextColumn Header="Change(24hr)" Binding="{Binding ChangePercent24Hr}" ElementStyle="{StaticResource Grid_Text_Style}"  Width="*" />
                 <DataGridTemplateColumn Header="Details" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

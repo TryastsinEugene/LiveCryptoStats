@@ -27,7 +27,7 @@ namespace LiveCryptoStats.ViewModel
 			Currencies = new ObservableCollection<Currency>();
 			SearchCommand = new RelayCommand(ExecuteSearch);
 			CurrencyDetailsCommand = new RelayCommand(OpenCurrencyDetails);
-			//_ = GetAssets(); 
+			_ = GetAssets(); 
 		}
 
 		private void OpenCurrencyDetails(object obj)
